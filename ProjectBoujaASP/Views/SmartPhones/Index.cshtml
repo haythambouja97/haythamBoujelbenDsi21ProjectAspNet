@@ -1,0 +1,83 @@
+﻿@model IEnumerable<SmartPhone>
+
+@{ ViewData["Title"] = "List of SmartPhones"; }
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-xs-6 border-info mb-3">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                            <div class="card d-flex position-relative flex-column">
+                <div class='imgContainer'>
+                    <img src='~/lib/images/@Html.DisplayFor(modelItem => item.PhotoPath)' width="250" height="250">
+                </div>
+                <div class="content">
+                    <h2>@Html.DisplayFor(modelItem => item.PhonelName) </h2>
+                     <h3>@Html.DisplayFor(modelItem => item.Salary) DT</h3>
+                    <p>@Html.DisplayFor(modelItem => item.PhoneDetails)</p>
+                 <a asp-action="Edit" asp-route-id="@item.SmartPhoneID" class="btn btn-info">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SmartPhoneID" class="btn btn-warning">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SmartPhoneID" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+            </div></div></div></div>
+                    
+    }
+</div>
+<style>
+
+
+.container .card
+{
+    max-width: 300px;
+    height: 215px;
+    margin: 30px 10px;
+    padding: 20px 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    transition: 0.3s ease-in-out;
+}
+.container .card:hover
+{
+    height: 450px;
+}
+.container .card .imgContainer
+{
+    position: relative;
+    width:250px;
+    height:250px;
+    top:-50px;
+    left:10px;
+    z-index: 1;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+.container .card .imgContainer img
+{
+    max-width: 100%;
+    border-radius: 4px;
+}
+.container .card .content
+{
+    position: relative;
+    margin-top: -140px;
+    padding: 10px 15px;
+    text-align: center;
+    color:#111;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+.container .card:hover .content
+{
+    visibility: visible;
+    opacity: 1;
+    margin-top: -40px;
+    transition-delay: 0.3s;
+}
+
+
+</style>
+ 

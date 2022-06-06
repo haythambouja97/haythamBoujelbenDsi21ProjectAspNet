@@ -1,0 +1,102 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProjectBoujaASP</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProjectBoujaASP.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body style="background-image:url(https://img.freepik.com/free-vector/galaxy-holographic-fantasy-background-pastel-colors_56745-130.jpg?w=2000s)">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="SmartPhones" asp-action="Index" >ProjectBoujaASP</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        
+                       
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Categorie" asp-action="index">Categorie <img src= "https://icons.iconarchive.com/icons/sora-meliae/matrilineare/512/Categories-applications-office-icon.png" width="30"> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="SmartPhones" asp-action="index">SmartPhones <img src="https://w7.pngwing.com/pngs/791/868/png-transparent-android-lollipop-computer-software-mobile-phones-lollipop.png" width="30"/></a>
+                        </li>
+                  
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("admin"))
+{
+                        <li class="nav-item dropdown font-weight-bold" >
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" ariahaspopup="true" aria-expanded="false">Administration <img src="https://e7.pngegg.com/pngimages/9/763/png-clipart-computer-icons-login-user-system-administrator-admin-desktop-wallpaper-megaphone-thumbnail.png"  width="30"/></a>
+                        <div class="dropdown-menu">
+                        <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="CreateRole">Create
+                        Role <img src= "https://cdn-icons-png.flaticon.com/512/5151/5151145.png" width="30"></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="ListRoles">List
+                        Roles <img src= "https://icon-library.com/images/role-icon/role-icon-23.jpg" width="30"></a>
+                        </div>
+                        </li>
+}
+                    </ul>
+                    <div class="collapse navbar-collapse position: right" id="collapsibleNavbar">
+                        <ul class="nav navbar-nav navbar-right">
+                        @*If the user is signed-in display Logout link*@
+                        @if(SignInManager.IsSignedIn(User))
+                        {
+                        <li class="btn btn-outline-warning my-2 my-sm-0">
+                        <form  class="form-inline my-2 my-lg-0" method="post" asp-controller="account" asp-action="logout">
+                        <button type="submit" style="width:auto"
+                        class="nav-link btn btn-link py-0">
+                        Logout @User.Identity.Name
+                         <img src= "https://icons.iconarchive.com/icons/graphicloads/100-flat-2/256/inside-logout-icon.png" width="30"></button>
+                        </form>
+                        </li>
+                        }
+                        else
+                        {
+                        <li class="nav-item ">
+                        <a class="btn btn-outline-danger my-2 my-sm-0" asp-controller="Account" asp-action="Register">
+                        Register <img src= "https://gurudwaratalhansahib.org/images/icons/register-icon.png" width="30">
+                        </a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="btn btn-outline-success my-2 my-sm-0" asp-controller="Account" asp-action="Login">
+                        Login <img src= "https://cdn5.vectorstock.com/i/1000x1000/33/09/login-icon-in-trendy-flat-style-vector-20053309.jpg" width="30">
+                        </a>
+                        </li>
+                        }
+                        </ul>
+                        </div>
+                </div>
+            </div>
+        </nav> 
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        
+           <b>&copy; 2022 - ProjectBoujaASP - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></b> 
+        
+    </footer>
+    <script src="~/js/CustomScript.js"></script>
+    <script src="~/js/CustomScript.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
